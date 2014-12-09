@@ -8,7 +8,7 @@ var $ = require('gulp-load-plugins')({
 
 gulp.task('styles', ['wiredep', 'injector:css:preprocessor'], function () {
   return gulp.src(['src/app/index.scss', 'src/app/vendor.scss'])
-    .pipe($.rubySass({style: 'expanded'}))
+    .pipe($.rubySass({style: 'expanded', 'sourcemap=none': true }))
     .on('error', function handleError(err) {
       console.error(err.toString());
       this.emit('end');

@@ -30,7 +30,7 @@ router.post('/', function (req, res, next) {
 	});
 	newTodo.save(function (err) {
 		if(err) return next(err);
-		res.json({ status: 'ok', msg: 'Inserted successfully' });
+		res.json(newTodo);
 	});
 });
 

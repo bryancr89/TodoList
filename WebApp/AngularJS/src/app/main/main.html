@@ -1,34 +1,35 @@
-<div layout="vertical" layout-fill data-ng-controller="MainCtrl as main">
+<div layout="vertical" layout-fill data-ng-controller="MainController as main">
     <header ng-include="'components/navbar/navbar.html'"></header>
     <md-content>
         <section class="actions-container" layout="row" layout-sm="column" layout-align="center center">
-            <md-button data-ng-click="main.view()">All</md-button>
-            <md-button data-ng-click="main.view(false)">Pending</md-button>
-            <md-button data-ng-click="main.view(true)">Completed</md-button>
+            <md-button data-ng-click="main.view()" aria-label="Show All">All</md-button>
+            <md-button data-ng-click="main.view(false)" aria-label="Show Pending">Pending</md-button>
+            <md-button data-ng-click="main.view(true)" aria-label="Show Completed">Completed</md-button>
         </section>
+
         <div class="techs" layout-align="left">
             <md-card data-ng-class="{'is-adding': main.isAdding}">
                 <div class="thumbnail">
                     <div>
-                        <h4>New todo</h4>
-                        <md-button data-ng-show="main.isValid()" data-ng-click="main.addTodo(main.newTodo)"
-                                   class="md-fab pull-right" aria-label="New document">
-                            <svg viewBox="0 0 24 24" class="svg-ic_add_24px svg-ic_add_24px-dims"
-                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <use xlink:href="svg/sprite.svg#ic_add_24px"></use>
-                            </svg>
-                        </md-button>
-                        <md-text-float label="Description" ng-model="main.newTodo.description" autofocus="autofocus"
-                                       class="long"></md-text-float>
+                        <md-text-float data-on-enter="main.addTodo(main.newTodo)"
+                                       data-ng-model="main.newTodo.description"
+                                       label="New Todo" autofocus="autofocus"
+                                       class="long" aria-label="Description"></md-text-float>
                     </div>
                 </div>
             </md-card>
-            <md-card ng-repeat="todo in filteredTodos = (main.todos | filter:main.filter | orderBy: 'description')">
+            <md-card ng-repeat="todo in filteredTodos = (main.todos | filter:main.filter)">
                 <div class="thumbnail">
-                    <md-checkbox ng-model="todo.status" ng-change="main.changeStatus(todo)"></md-checkbox>
-                    <div class="caption">
-                        <h4>{{todo.description}}</h4>
+                    <md-checkbox ng-model="todo.status" ng-change="main.changeStatus(todo)"
+                                 aria-label="Set state"></md-checkbox>
+                    <div class="caption" data-ng-hide="todo.isEditing">
+                        <h4 data-ng-dblclick="main.editMode(todo)">{{todo.description}}</h4>
                     </div>
+                    <div data-ng-show="todo.isEditing">
+                        <input data-on-enter="main.updateTodo(todo)" data-on-focus="todo.isEditing"
+                               data-ng-model="todo.description"></input>
+                    </div>
+
                 </div>
             </md-card>
         </div>

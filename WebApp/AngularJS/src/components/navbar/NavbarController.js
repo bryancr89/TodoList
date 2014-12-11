@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('angularJs')
-  .controller('NavbarCtrl', function ($scope) {
+  .controller('NavbarController', function ($scope) {
     $scope.date = new Date();
   });

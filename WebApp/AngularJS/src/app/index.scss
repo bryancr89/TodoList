@@ -1,5 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
 @import url(../../bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-content.css);
+@import url(../../bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-image.css);
 
 html {
   font-family: 'Roboto Slab', serif;
@@ -78,7 +79,7 @@ section.jumbotron {
   }
 }
 
-.svg-ic_add_24px {
+.svg-ic_add_24px, .svg-ic_edit_24px {
   height: 24px;
 }
 
